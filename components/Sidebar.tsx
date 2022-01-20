@@ -16,10 +16,7 @@ function Sidebar() {
       <div className="space-y-4">
         <button
           className="flex items-center space-x-2 hover:text-white"
-          onClick={() => {
-            console.log("sign out");
-            return signOut();
-          }}
+          onClick={() => signOut()}
         >
           <p>Logout</p>
         </button>

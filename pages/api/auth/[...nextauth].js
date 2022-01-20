@@ -44,9 +44,10 @@ export default NextAuth({
     async jwt({ token, account, user }) {
       // initial sign in
       if (account && user) {
+        console.log("INTIAL SIGN IN");
         return {
           ...token,
-          accessToken: account.account_token,
+          accessToken: account.access_token,
           refreshToken: account.refresh_token,
           username: account.providerAccountId,
           accessTokenExpires: account.expires_at * 1000, // handling expiry times in Milliseconds
@@ -65,10 +66,9 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      session.user.accountToken = token.accessToken;
+      session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       session.user.username = token.username;
-
       return session;
     },
   },
