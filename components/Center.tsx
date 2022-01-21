@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 
 const colors = [
   "from-indigo-500",
@@ -46,16 +47,17 @@ function Center() {
           <img
             className="rounded-full w-10 h-10"
             src={session?.user.image}
-            u
             alt=""
           />
           <h2>{session?.user.name}</h2>
+          <ChevronDownIcon className="h-5 w-5" />
         </div>
       </header>
-      <session
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white padding-8`}
+      <section
+        className={`flex items-end space-x-7
+        bg-gradient-to-b to-black ${color} h-80
+         text-white p-8`}
       >
-        {console.log("PL", playlist)}
         <img
           className="h-44 w-44 shadow-2xl"
           src={playlist?.images?.[0]?.url}
@@ -63,22 +65,15 @@ function Center() {
         />
         <div>
           <p>PLAYLIST</p>
-          <h1 className="text-2xl md:text-3xl xl:text-5xl">{playlist?.name}</h1>
-          <div>
-            <Songs />
-          </div>
+          <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">
+            {playlist?.name}
+          </h1>
         </div>
-      </session>
+      </section>
+      <div>
+        <Songs />
+      </div>
     </div>
   );
 }
 export default Center;
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-
-  return {
-    props: {
-      session,
-    },
-  };
-}
