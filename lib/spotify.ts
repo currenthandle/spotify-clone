@@ -5,9 +5,9 @@ import SpotifyWebApi from "spotify-web-api-node/src/spotify-web-api";
 const scopes = [
   "user-read-email",
   "playlist-read-private",
-  "playlist-read-collabrative",
+  "playlist-read-collaborative",
   "user-read-email",
-  "streams",
+  "streaming",
   "user-read-private",
   "user-library-read",
   "user-top-read",
@@ -15,12 +15,13 @@ const scopes = [
   "user-read-playback-state",
   "user-modify-playback-state",
   "user-read-currently-playing",
-  "user-read-rectntly-played",
+  "user-read-recently-played",
+  "user-read-playback-state",
   "user-follow-read",
 ].join(",");
 
 const params = {
-  scopes,
+  scopes: scopes,
 };
 
 const queryParamsString = new URLSearchParams(params);

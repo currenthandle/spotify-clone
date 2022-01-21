@@ -1,9 +1,33 @@
+import { useRecoilState } from "recoil";
+import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import useSpotify from "../hooks/useSpotify";
 import { millisToMinutesAndSeconds } from "../lib/time";
+
 function Song({ order, track }) {
   const spotifyApi = useSpotify();
+  const [currentTrackId, setCurrentTrackId] =
+    useRecoilState(currentTrackIdState);
+  const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+
+  const playSong = async () => {
+    console.log("track uri", track.track.uri);
+    setCurrentTrackId(track.track.id);
+    setIsPlaying(true);
+    console.log("before try");
+    console.log(spotifyApi);
+    spotifyApi
+      .play({
+        uris: [track.track.uri],
+      })
+      .then((d) => console.log("hi", d))
+      .catch((e) => console.log("err", e));
+  };
+
   return (
-    <div className="grid grid-cols-2 text-gray-500 py-4 px-5i hover:bg-gray-900 rounded-lg cursor-pointer">
+    <div
+      className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer"
+      onClick={playSong}
+    >
       <div className="flex items-center space-x-4">
         <p>{order + 1}</p>
         <img
@@ -12,7 +36,7 @@ function Song({ order, track }) {
           alt=""
         />
         <div>
-          <p className="w-36 lg:-64 text-white truncate">{track.track.name}</p>
+          <p className="w-36 lg:w-64 text-white truncate">{track.track.name}</p>
           <p className="w-40 ">{track.track.artists[0].name}</p>
         </div>
       </div>
@@ -25,3 +49,18 @@ function Song({ order, track }) {
 }
 
 export default Song;
+
+//spotifyApi.getMyTopArtist()
+/*
+    spotifyApi.getArtistAlbums(
+      "43ZHCT0cAZBISjO8DG9PnE",
+      { limit: 10, offset: 20 },
+      function (err, data) {
+        if (err) {
+          console.error("Something went wrong!");
+        } else {
+          console.log(data.body);
+        }
+      }
+    );
+    */
