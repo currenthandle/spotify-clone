@@ -39,6 +39,12 @@ function Player() {
       });
     }
   };
+  useEffect(() => {
+    if (spotifyApi.getAccessToken() && !currentTrackId) {
+      fetchCurrentSong();
+      setVolume(50);
+    }
+  }, [currentTrackId, spotifyApi, session]);
 
   const handlePlayPause = () => {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
@@ -51,12 +57,6 @@ function Player() {
       }
     });
   };
-  useEffect(() => {
-    if (spotifyApi.getAccessToken() && !currentTrackId) {
-      fetchCurrentSong();
-      setVolume(50);
-    }
-  }, [currentTrackId, spotifyApi, session]);
 
   return (
     <div className="h-24 bg-gradient-to-b from-black to-gray-900 border-gray-900 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
