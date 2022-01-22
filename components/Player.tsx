@@ -60,24 +60,24 @@ function Player() {
           <h3>{songInfo?.name}</h3>
           <p>{songInfo?.artists?.[0]?.name}</p>
         </div>
-        {/* Center */}
-        <div className="flex items-center justify-evenly">
-          <SwitchHorizontalIcon className="button" />
-          <RewindIcon
-            // onClick={() => spotifyApi.skipToPrevious()} -- The API is not working
-            className="button"
-          />
-          {isPlaying ? (
-            <PauseIcon className="button w-10 h-10" />
-          ) : (
-            <PlayIcon className="button w-10 h-10" />
-          )}
-          <FastForwardIcon
-            // onClick={() => spotifyApi.skipToNext()} -- The API is not working
-            className="button"
-          />
-          <ReplyIcon className="button" />
-        </div>
+      </div>
+      {/* Center */}
+      <div className="flex items-center justify-evenly">
+        <SwitchHorizontalIcon className="button" />
+        <RewindIcon
+          // onClick={() => spotifyApi.skipToPrevious()} -- The API is not working
+          className="button"
+        />
+        {isPlaying ? (
+          <PauseIcon className="button w-10 h-10" />
+        ) : (
+          <PlayIcon className="button w-10 h-10" />
+        )}
+        <FastForwardIcon
+          // onClick={() => spotifyApi.skipToNext()} -- The API is not working
+          className="button"
+        />
+        <ReplyIcon className="button" />
       </div>
     </div>
   );
