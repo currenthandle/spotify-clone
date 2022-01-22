@@ -21,7 +21,8 @@ import {
 function Player() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
-  const [currentTrackId, setCurrentIdTrack] = useRecoilState(isPlayingState);
+  const [currentTrackId, setCurrentIdTrack] =
+    useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [volume, setVolume] = useState(50);
 
