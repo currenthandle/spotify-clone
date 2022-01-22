@@ -1,6 +1,6 @@
 // helper for Spotify
 
-import SpotifyWebApi from "spotify-web-api-node/src/spotify-web-api";
+import SpotifyWebApi from "spotify-web-api-node";
 
 const scopes = [
   "user-read-email",
@@ -10,8 +10,8 @@ const scopes = [
   "streaming",
   "user-read-private",
   "user-library-read",
+  // "user-library-modify",
   "user-top-read",
-  // "user-library-modify"
   "user-read-playback-state",
   "user-modify-playback-state",
   "user-read-currently-playing",
@@ -20,7 +20,7 @@ const scopes = [
 ].join(",");
 
 const params = {
-  scopes: scopes,
+  scope: scopes,
 };
 
 const queryParamsString = new URLSearchParams(params);
