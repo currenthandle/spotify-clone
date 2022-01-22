@@ -40,6 +40,17 @@ function Player() {
     }
   };
 
+  const handlePlayPause = () => {
+    spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      if (data.body.is_playing) {
+        spotifyApi.pause();
+        setIsPlaying(false);
+      } else {
+        spotifyApi.play();
+        setVolume(true);
+      }
+    });
+  };
   useEffect(() => {
     if (spotifyApi.getAccessToken() && !currentTrackId) {
       fetchCurrentSong();
@@ -69,9 +80,9 @@ function Player() {
           className="button"
         />
         {isPlaying ? (
-          <PauseIcon className="button w-10 h-10" />
+          <PauseIcon onClick={handlePlayPause} className="button w-10 h-10" />
         ) : (
-          <PlayIcon className="button w-10 h-10" />
+          <PlayIcon onClick={handlePlayPause} className="button w-10 h-10" />
         )}
         <FastForwardIcon
           // onClick={() => spotifyApi.skipToNext()} -- The API is not working
