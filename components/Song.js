@@ -11,10 +11,11 @@ function Song({ order, track }) {
 
   const playSong = async () => {
     console.log("track uri", track.track.uri);
+
+    const token = spotifyApi.getAccessToken();
     setCurrentTrackId(track.track.id);
     setIsPlaying(true);
-    console.log("before try");
-    console.log(spotifyApi);
+
     spotifyApi
       .play({
         uris: [track.track.uri],
@@ -49,18 +50,3 @@ function Song({ order, track }) {
 }
 
 export default Song;
-
-//spotifyApi.getMyTopArtist()
-/*
-    spotifyApi.getArtistAlbums(
-      "43ZHCT0cAZBISjO8DG9PnE",
-      { limit: 10, offset: 20 },
-      function (err, data) {
-        if (err) {
-          console.error("Something went wrong!");
-        } else {
-          console.log(data.body);
-        }
-      }
-    );
-    */
