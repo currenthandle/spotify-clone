@@ -10,17 +10,14 @@ function Song({ order, track }) {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
   const playSong = async () => {
-    console.log("track uri", track.track.uri);
     setCurrentTrackId(track.track.id);
     setIsPlaying(true);
-    console.log("before try");
-    console.log(spotifyApi);
     spotifyApi
       .play({
         uris: [track.track.uri],
       })
-      .then((d) => console.log("hi", d))
-      .catch((e) => console.log("err", e));
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
   };
 
   return (
