@@ -54,7 +54,7 @@ function Player() {
         setIsPlaying(false);
       } else {
         spotifyApi.play();
-        setVolume(true);
+        setIsPlaying(true);
       }
     });
   };
