@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import useSpotify from "../hooks/useSpotify";
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
@@ -17,6 +17,7 @@ import {
   HeartIcon,
   VolumeUpIcon as VolumeDownIcon,
 } from "@heroicons/react/outline";
+import { debounce } from "lodash";
 
 function Player() {
   const spotifyApi = useSpotify();
@@ -40,12 +41,6 @@ function Player() {
       });
     }
   };
-  useEffect(() => {
-    if (spotifyApi.getAccessToken() && !currentTrackId) {
-      fetchCurrentSong();
-      setVolume(50);
-    }
-  }, [currentTrackId, spotifyApi, session]);
 
   const handlePlayPause = () => {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
@@ -58,6 +53,26 @@ function Player() {
       }
     });
   };
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken() && !currentTrackId) {
+      fetchCurrentSong();
+      setVolume(50);
+    }
+  }, [currentTrackId, spotifyApi, session]);
+
+  useEffect(() => {
+    if (volume > 0 && volume < 100) {
+      debouncedAdjustVolume(volume);
+    }
+  }, [volume]);
+
+  const debouncedAdjustVolume = useCallback(
+    debounce((volume) => {
+      spotifyApi.setVolume(volume).catch((err) => console.error(err));
+    }, 500),
+    []
+  );
 
   return (
     <div className="h-24 bg-gradient-to-b from-black to-gray-900 border-gray-900 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
