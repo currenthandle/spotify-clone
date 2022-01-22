@@ -99,7 +99,7 @@ function Player() {
         />
         <input
           className="w-14 md:w-28"
-          value=""
+          value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
           type="range"
           min={0}
