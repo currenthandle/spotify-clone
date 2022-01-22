@@ -15,6 +15,21 @@
     "incremental": true,
     "isolatedModules": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/login.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/login.js",
+    "atoms/playlistAtom.js",
+    "atoms/songAtom.js",
+    "pages/index.js",
+    "pages/_app.js",
+    "lib/spotify.js",
+    "lib/time.js",
+    "components/Songs.js",
+    "components/Song.js",
+    "components/Sidebar.js",
+    "components/Center.js"
+  ],
   "exclude": ["node_modules"]
 }
